@@ -1,0 +1,20 @@
+:root {
+    --cell-size: 60px;
+    --grid-size: 10;
+}
+
+
+#grid {
+    width: calc(var(--cell-size) * var(--grid-size));
+    height: calc(var(--cell-size) * var(--grid-size));
+    background-color: aquamarine;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#grid > div {
+    width: var(--cell-size);
+    height: var(--cell-size);   
+    background-color: brown; 
+    border: solid 1px white;
+}

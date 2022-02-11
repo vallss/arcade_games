@@ -1,0 +1,10 @@
+Move and collect game
+randomize food positioned inside the grid
+the player has to collect all the good food avoiding the obstacles and the rotten food
+
+rules:
+if the player centers an obstacle loses the game
+if the player gets rotten food loses a chance
+
+let's say the playes has 3 chances every match
+
