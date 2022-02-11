@@ -1,0 +1,40 @@
+:root {
+    --road-size: 60px;
+}
+
+#grid {
+    width: calc(var(--road-size) * 10);
+    height: 400px;
+    display: flex;
+    align-items: flex-end; 
+    border-bottom: 3px solid white;
+}
+
+#grid > div {  /* selettore child diretti del contenitore genitore */
+    width: var(--road-size);
+    height: var(--road-size);
+}
+
+/* inseriamo l'immmagine tramite la property css e non il tag html img per due motivi:
+1. sarà più facile poi gestirla via javascript
+2. è un'immagine a solo fine estetico e non è necessario che venga indicizzata e vista dai motori di ricerca. 
+Nel caso in cui invece fosse stata inserita per motivi anche di indicizzazione allora si sarebe dovuto utilizzare il tag img in modo da essere resa visibile ai motori di ricerca  */
+
+.duck {
+    background-image: url('./images/duck.png');
+    background-repeat: no-repeat;    
+    background-size: contain;
+    background-position: center;   
+    transition: transform 0.3s;  /* è una proprietà che permette di definire il comportamento "intermedio" dell'elemento nel cambiamento da uno stato all'altro */
+}
+
+.duck-jump {
+    transform: translate(0, -120%);
+}
+
+.plant:not(.duck) { /* applichiamo la classe plant soltanto quando non è già presente la classe duck. In questo modo le property della classe plant non verranno assegnate ergo vedremo solo la paperella */
+    background-image: url('./images/plant.png');
+    background-repeat: no-repeat;    
+    background-size: contain;
+    background-position: center;    
+}

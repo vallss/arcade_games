@@ -1,0 +1,3 @@
+remember players -> "login" system or chance to enter players' names.
+this way will be possible to have a ranking
+

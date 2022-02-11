@@ -1,0 +1,45 @@
+:root {
+  /* nel css possiamo specificare delle variabili css. possiamo farlo solo a livello di root ed è il motivo per cui si utilizzano i due punti, è una sintassi specifica  */
+  --card-size: 150px;
+}
+
+#grid {
+  height: calc(var(--card-size) * 3);
+  width: calc(var(--card-size) * 4);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: var(--card-size);
+  height: var(--card-size);
+  background-image: url(./images/back.png);
+  background-repeat: no-repeat;
+  background-size: contain; /* stiamo dicendo all'immagine di background di restare contenuta rispetto al suo contenitore */
+  cursor: pointer;
+}
+
+/* UNA CLASSE PER OGNI CARD*/
+.alien {
+  background-image: url(./images/alien.png);
+}
+
+.bug {
+  background-image: url(./images/bug.png);
+}
+
+.duck {
+  background-image: url(./images/duck.png);
+}
+
+.rocket {
+  background-image: url(./images/rocket.png);
+}
+
+.spaceship {
+  background-image: url(./images/spaceship.png);
+}
+
+.tiktac {
+  background-image: url(./images/tiktac.png);
+}
