@@ -1,13 +1,15 @@
 :root {
     --cell-size: 60px;
-    --grid-size: 10;
+    --grid-size: 10;    
 }
 
+body {
+    background-color: #6a6ac5;
+}
 
 #grid {
     width: calc(var(--cell-size) * var(--grid-size));
     height: calc(var(--cell-size) * var(--grid-size));
-    background-color: aquamarine;
     display: flex;
     flex-wrap: wrap;
 }
@@ -15,6 +17,20 @@
 #grid > div {
     width: var(--cell-size);
     height: var(--cell-size);   
-    background-color: brown; 
-    border: solid 1px white;
+    border: solid 1px white;    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.good-food {
+    background-image: url(./images/good-food.png);
+}
+
+.rotten-food {
+    background-image: url(./images/rotten-food.png);
+}
+
+.character {
+    background-image: url(./images/character.png);
 }
