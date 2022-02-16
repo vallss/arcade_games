@@ -113,8 +113,27 @@ function assignCharacterPosition() {
     return characterPosition;
 }
 
-characterPosition = assignCharacterPosition();
-cells[characterPosition].classList.add('character');
+//START TIMER
+startButton.addEventListener('click', function(){
+    characterPosition = assignCharacterPosition();
+    cells[characterPosition].classList.add('character');
+    
+    const timer = setInterval(countDown, 1000);
+});
+
+
+function countDown() {
+    if (timeLeft != 0) {
+        timeLeft--;
+        timerDisplay.innerText = timeLeft;
+    } else if (timeLeft === 0) {
+        showAlert('TIME\'S UP!');
+    }
+}
+
+
+
+
 
 
 //Move character - 
@@ -168,20 +187,7 @@ function checkForFood() {
     }
 }
 
-//START TIMER
-startButton.addEventListener('click', function(){
-    const timer = setInterval(countDown, 1000);
-});
 
-
-function countDown() {
-    if (timeLeft != 0) {
-        timeLeft--;
-        timerDisplay.innerText = timeLeft;
-    } else if (timeLeft === 0) {
-        showAlert('TIME\'S UP!');
-    }
-}
 
 //Check if user has won - stop countdown, show alert
 function checkForWin() {
