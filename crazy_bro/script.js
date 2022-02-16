@@ -3,10 +3,22 @@ const grid = document.querySelector('#grid');
 const area = 10 * 10;
 const cells = [];
 
+const scoreEl = document.querySelector('#score');
+scoreEl.innerText = 0;
+let score = 0;
+
+const startButton = document.querySelector('#btn-start');
+
+const timerDisplay = document.querySelector('#time-left');
+let timeLeft = 30;
+timerDisplay.innerText = timeLeft;
+
+
 //create playing board
 for (let i = 0; i < area; i++) {
     const cell = document.createElement('div');
     grid.appendChild(cell);
+    //  cell.innerText = i;
     cells.push(cell);
 }
 
@@ -84,6 +96,7 @@ assignRottenPositions(rottenFoodPositions);
 
 //Set character position
 //const characterPos;
+let characterPosition = 0;
 
 function assignCharacterPosition() {
     let usedPositions = [];
@@ -92,31 +105,88 @@ function assignCharacterPosition() {
         randomNumber = Math.floor(Math.random() * 100);
         condition = usedPositions.includes(randomNumber);
         if (!condition) {
-            const characterPosition = randomNumber;
-            cells[characterPosition].classList.add('character');
+            characterPosition = randomNumber;
+            // cells[characterPosition].classList.add('character');
         }
     }
     while (condition);
+    return characterPosition;
 }
 
-assignCharacterPosition();
+characterPosition = assignCharacterPosition();
+cells[characterPosition].classList.add('character');
 
 
-
-//Move character
+//Move character - 
 /* character can move in all directions using keys up, down, left, right.
 If she/he runs against good food the score goes up whereas if they run against rotten food they lose the game
-*/
-document.addEventListener('keydown', function (event) {
+*/  // ArrowDown (+10), ArrowUp (-10), ArrowLeft (-1), ArrowRight(+1)
+//borders:  if (position % 10 === 0 || position % 10 === 9)
 
-    if (event.code === 'Arrow')
-    console.log(event);
+function moveCharacter(event) {
+    const topEdge = characterPosition >= 0 && characterPosition <= 9;
+    const bottomEdge = characterPosition >= 90 && characterPosition <= 99;
+    const rightEdge = characterPosition % 10 === 9;
+    const leftEdge = characterPosition % 10 === 0;
+    if (event.code === 'ArrowUp' && !topEdge) {
+        cells[characterPosition].classList.remove('character');
+        characterPosition -= 10;
+        cells[characterPosition].classList.add('character');
+        checkForFood();
+    } else if (event.code === 'ArrowDown' && !bottomEdge) {
+        cells[characterPosition].classList.remove('character');
+        characterPosition += 10;
+        cells[characterPosition].classList.add('character');
+        checkForFood();
+    } else if (event.code === 'ArrowLeft' && !leftEdge) {
+        cells[characterPosition].classList.remove('character');
+        characterPosition--;
+        cells[characterPosition].classList.add('character');
+        checkForFood();
+    } else if (event.code === 'ArrowRight' && !rightEdge) {
+        cells[characterPosition].classList.remove('character');
+        characterPosition++;
+        cells[characterPosition].classList.add('character');
+        checkForFood();
+    }
+}
+
+document.addEventListener('keydown', moveCharacter);
+
+//check for good food or rotten food
+
+function checkForFood() {
+    if (cells[characterPosition].classList.contains('good-food')) {
+        score++;
+        scoreEl.innerText = score;
+        cells[characterPosition].classList.remove('good-food');
+
+        checkForWin();
+
+    } else if (cells[characterPosition].classList.contains('rotten-food')) {
+        showAlert(`YOU LOST! SCORE ${score}`);
+    }
+}
+
+//START TIMER
+startButton.addEventListener('click', function(){
+    const timer = setInterval(countDown, 1000);
 });
 
 
-function moveCharacter() {
-
+function countDown() {
+    if (timeLeft != 0) {
+        timeLeft--;
+        timerDisplay.innerText = timeLeft;
+    } else if (timeLeft === 0) {
+        showAlert('TIME\'S UP!');
+    }
 }
 
-
-
+//Check if user has won - stop countdown, show alert
+function checkForWin() {
+    if (score === goodFoodPositions.length) {
+        showAlert(`YOU WON! YOU COLLECTED ALL THE ${score} GOOD ELEMENTS!`);
+        clearInterval(timer);
+    }
+}

@@ -7,6 +7,22 @@ body {
     background-color: #6a6ac5;
 }
 
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: gainsboro;
+    border: 2px grey solid;
+    border-radius: 8px;  
+    margin: 20px 0px 20px 0px; 
+}
+
+button:hover {
+    background-color: forestgreen;
+    color: white;
+    cursor: pointer;
+}
+
+
 #grid {
     width: calc(var(--cell-size) * var(--grid-size));
     height: calc(var(--cell-size) * var(--grid-size));
